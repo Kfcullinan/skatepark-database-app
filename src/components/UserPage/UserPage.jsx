@@ -21,7 +21,7 @@ function UserPage() {
     dispatch ({ type: 'FETCH_FEATURES', payload: skatepark.id});
     history.push('/details')
   }
-  
+
   return (
     <div className="container">
       <h2>Welcome, {user.username}!</h2>
@@ -31,7 +31,7 @@ function UserPage() {
         <h1>Skateparks</h1>
         <section>
           <pre>{JSON.stringify(skateparks)}</pre>
-          {skateparks.map((skateparks) => {
+          {skateparks.map(skateparks => {
             return (
               <div key={skateparks.id}>
                 <h2>{skateparks.name}</h2>
