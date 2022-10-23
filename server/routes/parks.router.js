@@ -7,7 +7,7 @@ const router = express.Router();
  */
 router.get('/', (req, res) => {
   // GET route code here
-  console.log('/user GET route');
+  console.log('/parks GET route');
   console.log('is authenticated?', req.isAuthenticated());
   console.log('user', req.user);
   // Authentication: Are you logged in?
@@ -39,8 +39,9 @@ router.get('/', (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
-  // POST route code here
-});
+// router.post('/', (req, res) => {
+//   // POST route code here
+
+// });
 
 module.exports = router;
