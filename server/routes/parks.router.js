@@ -14,11 +14,11 @@ router.get('/', (req, res) => {
   if (req.isAuthenticated()) {
       // Authorization: What level of access do you have?
       if (req.user.id === 1) {
-          let queryText = `SELECT * FROM "skateparks"`;
+          let queryText = `SELECT * FROM "skateparks" ORDER BY "id"`;
           pool.query(queryText).then((result) => {
               res.send(result.rows);
           }).catch((error) => {
-              console.log(error);
+              console.log('Error completing SELECT park query', error);
               res.sendStatus(500);
           });
       } else {
@@ -36,16 +36,33 @@ router.get('/', (req, res) => {
   }
 });
 
+//GET selected skateparks
+route.get('/:id', (req, res) => {
+    const queryText = 'SELECT * FROM "skateparks" WHERE "id"=$1';
+
+    pool.query(queryText, [req.params.id])
+    .then((result) => {
+        res.send(result.rows[0])
+    })
+    .catch((error) => {
+        console.log('Error completing SELECT skatepark query', error)
+        res.sendStatus(500)
+    })
+})
+
+//GET selected skatepark features 
+
 /**
  * POST route template
  */
  router.post('/', (req, res) => {
     console.log(req.body);
     // RETURNING "id" will give us back the id of the created park
+    
     const insertSkateparkQuery = `
     INSERT INTO "skateparks" ("name", "location", "space_type", "difficulty")
     VALUES ($1, $2, $3, $4)
-    RETURNING "id";`
+    RETURNING "id"`;
   
     // FIRST QUERY MAKES PARK
     pool.query(insertSkateparkQuery, [req.body.name, req.body.location, req.body.space_type, req.body.difficulty])
@@ -54,22 +71,22 @@ router.get('/', (req, res) => {
       
       const createdSkateparkId = result.rows[0].id
   
-    //   // Now handle the genre reference
-    //   const insertMovieGenreQuery = `
-    //     INSERT INTO "movies_genres" ("movie_id", "genre_id")
-    //     VALUES  ($1, $2);
-    //     `
-    //     // SECOND QUERY ADDS GENRE FOR THAT NEW MOVIE
-    //     pool.query(insertMovieGenreQuery, [createdMovieId, req.body.genre_id]).then(result => {
-    //       //Now that both are done, send back success!
-    //       res.sendStatus(201);
-    //     }).catch(err => {
-    //       // catch for second query
-    //       console.log(err);
-    //       res.sendStatus(500)
-    //     })
+      // Now handle the genre reference
+      const insertSkateparkDetailsQuery = `
+        INSERT INTO "skatepark_features" ("skatepark_id", "feature_id")
+        VALUES  ($1, $2);
+        `
+        // SECOND QUERY ADDS GENRE FOR THAT NEW MOVIE
+        pool.query(insertSkateparkDetailsQuery, [createdSkateparkId, req.body.genre_id]).then(result => {
+          //Now that both are done, send back success!
+          res.sendStatus(201);
+        }).catch(err => {
+          // catch for second query
+          console.log(err);
+          res.sendStatus(500)
+        })
   
-  // Catch for first query
+  //Catch for first query
     }).catch(err => {
       console.log(err);
       res.sendStatus(500)

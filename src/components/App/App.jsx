@@ -21,7 +21,9 @@ import LoginPage from "../LoginPage/LoginPage";
 import RegisterPage from "../RegisterPage/RegisterPage";
 
 import "./App.css";
-import AddParkPage from "../AddSkateparkPage/AddSkateparkPage";
+import SkateparkDetailsPage from "../SkateparkDetailsPage/SkateparkDetailsPage";
+import AddSkateparkPage from "../AddSkateparkPage/AddSkateparkPage";
+import SkateparkEditPage from "../SkateparkEditPage/SkateparkEditPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -46,22 +48,22 @@ function App() {
             exact path="/about">
             <AboutPage />
           </Route>
-
+{/* 
           <Route exact path="/landingpage">
             <LandingPage />
-          </Route>
+          </Route> */}
 
           <Route exact path="/details">
             <SkateparkDetailsPage />
           </Route>
 
-          <Route exact path="/edit">
+          {/* <Route exact path="/edit">
             <SkateparkEditPage />
-          </Route>
+          </Route> */}
 
-          <Route exact path="/newpark">
+          {/* <Route exact path="/newpark">
             <AddSkateparkPage />
-          </Route>
+          </Route> */}
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.

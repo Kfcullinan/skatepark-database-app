@@ -16,9 +16,9 @@ function UserPage() {
     dispatch({ type: "FETCH_SKATEPARKS" });
   }, []);
 
-  const detail = (movie) =>{
+  const detail = (skatepark) =>{
     dispatch ({ type: 'SELECT_SKATEPARK', payload: skatepark});
-    dispatch ({ type: 'FETCH_FEATURES', payload: skatepark.id});
+    dispatch ({ type: 'FETCH_FEATURES', payload: skateparks.id});
     history.push('/details')
   }
 
@@ -38,7 +38,7 @@ function UserPage() {
                 <h3>{skateparks.location}</h3>
                 <h3>{skateparks.space_type}</h3>
                 <h3>{skateparks.difficulty}</h3>
-
+                <button onClick={() => {detail(skatepark)}}/>
                 <br></br>
                 {/* <button>DELETE</button> finish this */}
               </div>
