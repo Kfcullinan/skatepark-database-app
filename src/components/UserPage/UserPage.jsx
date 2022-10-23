@@ -27,7 +27,11 @@ function UserPage() {
       <pre>{JSON.stringify(skateparks)}</pre>
       {
        skateparks.map(skateparks => {
-          return <div key={skateparks.id}>{skateparks.name}</div>
+          return <div key={skateparks.id}>{skateparks.name}
+          <br></br>
+          {/* <button>DELETE</button> finish this */}
+          </div>
+          
       })
       }
      </div>
