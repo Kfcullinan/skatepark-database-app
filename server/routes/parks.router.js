@@ -37,7 +37,7 @@ router.get('/', (req, res) => {
 });
 
 //GET selected skateparks
-route.get('/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     const queryText = 'SELECT * FROM "skateparks" WHERE "id"=$1';
 
     pool.query(queryText, [req.params.id])

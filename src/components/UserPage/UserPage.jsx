@@ -10,17 +10,18 @@ function UserPage() {
   const user = useSelector((store) => store.user);
   const history = useHistory();
   const dispatch = useDispatch();
-  const skateparks = useSelector((store) => store.skateparks);
+  const skateparks = useSelector(store => store.skateparks);
 
+  console.log('hello', skateparks)
   useEffect(() => {
     dispatch({ type: "FETCH_SKATEPARKS" });
   }, []);
 
-  const detail = (skatepark) =>{
-    dispatch ({ type: 'SELECT_SKATEPARK', payload: skatepark});
-    dispatch ({ type: 'FETCH_FEATURES', payload: skateparks.id});
-    history.push('/details')
-  }
+  // const detail = (skatepark) =>{
+  //   dispatch ({ type: 'SELECT_SKATEPARK', payload: skatepark});
+  //   dispatch ({ type: 'FETCH_FEATURES', payload: skateparks.id});
+  //   history.push('/details')
+  // }
 
   return (
     <div className="container">
@@ -30,7 +31,7 @@ function UserPage() {
     
         <h1>Skateparks</h1>
         <section>
-          <pre>{JSON.stringify(skateparks)}</pre>
+          <pre>hello{JSON.stringify(skateparks)}</pre>
           {skateparks.map(skateparks => {
             return (
               <div key={skateparks.id}>
@@ -38,9 +39,9 @@ function UserPage() {
                 <h3>{skateparks.location}</h3>
                 <h3>{skateparks.space_type}</h3>
                 <h3>{skateparks.difficulty}</h3>
-                <button onClick={() => {detail(skatepark)}}/>
+                {/* <button onClick={() => {detail(skatepark)}}/> */}
                 <br></br>
-                {/* <button>DELETE</button> finish this */}
+                
               </div>
             );
           })}

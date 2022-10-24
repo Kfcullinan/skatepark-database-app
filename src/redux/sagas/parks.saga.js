@@ -4,7 +4,7 @@ import axios from "axios";
 //all Skatepark Sagas
 function* parksSaga() {
   yield takeLatest('FETCH_SKATEPARKS', fetchAllSkateparks);
-  yield takeLatest('FETCH_DETAILS', fetchDetails);
+  //yield takeLatest('FETCH_DETAILS', fetchDetails);
   // yield takeLatest('FETCH_FEATURES', fetchFeatures);
 }
 
