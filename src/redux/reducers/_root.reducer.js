@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import errors from './errors.reducer';
 import user from './user.reducer';
 import skateparks from './skatepark.reducer';
-import featuresReducer from './feature.reducer';
+import featuresReducer from './features.reducer';
 import individualSkateparkReducer from './individualSkateparkReducer';
 
 // rootReducer is the primary reducer for our entire project
