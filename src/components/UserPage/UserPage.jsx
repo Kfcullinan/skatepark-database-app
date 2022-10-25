@@ -31,6 +31,10 @@ function UserPage() {
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <LogOutButton className="btn" />
+      <br></br>
+      <br></br>
+
+      <button onClick={navToAddParkPage}>Add new park</button> 
 
       
     
@@ -44,7 +48,7 @@ function UserPage() {
                 <h3>{skateparks.location}</h3>
                 <h3>{skateparks.space_type}</h3>
                 <h3>{skateparks.difficulty}</h3>
-                <button onClick={() => {navToAddParkPage}}/> 
+                
                  {/* <button onClick={() => {detail(skatepark)}}/>  */}
                 <br></br>
                 
