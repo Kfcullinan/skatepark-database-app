@@ -12,6 +12,9 @@ function UserPage() {
   const dispatch = useDispatch();
   const skateparks = useSelector(store => store.skateparks);
 
+  const navToAddParkPage = () => {
+    history.push("/newpark")
+  }
   console.log('hello', skateparks)
   useEffect(() => {
     dispatch({ type: "FETCH_SKATEPARKS" });
@@ -28,6 +31,8 @@ function UserPage() {
       <h2>Welcome, {user.username}!</h2>
       <p>Your ID is: {user.id}</p>
       <LogOutButton className="btn" />
+
+      
     
         <h1>Skateparks</h1>
         <section>
@@ -39,7 +44,8 @@ function UserPage() {
                 <h3>{skateparks.location}</h3>
                 <h3>{skateparks.space_type}</h3>
                 <h3>{skateparks.difficulty}</h3>
-                {/* <button onClick={() => {detail(skatepark)}}/> */}
+                <button onClick={() => {navToAddParkPage}}/> 
+                 {/* <button onClick={() => {detail(skatepark)}}/>  */}
                 <br></br>
                 
               </div>

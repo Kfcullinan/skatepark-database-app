@@ -1,11 +1,20 @@
-import React, {useState}from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-const AddSkateparkPage = () => {
+
+
+function AddSkateparkPage() {
+    const features = useSelector( store => store.features );
+    const [name, setName] = useState('');
+    const [location, setLocation] = useState('');
+    const [spaceType, setSpaceType] = useState('');
+    const [difficulty, setDifficulty] = useState('');
     const dispatch = useDispatch();
-    
+    const history = useHistory();
     //Initial state is an OBJECT, with keys id and name
-    let [newSkatepark, setSkatePark] = useState({id: 5, name: ''});
+    // let [newSkatepark, setSkatePark] = useState({id: 5, name: ''});
 
     const handleNameChange = (event) => {
         console.log('event happened');
@@ -22,13 +31,21 @@ const AddSkateparkPage = () => {
         //updates the next skatepark to have a new id
         //setSkatepark({id:newSkatepark.id + 1, name: ''});
     }
+
+    const submitForm = (e) => {
+        e.preventDefault();
+        // Pass history with our dispatch so that the saga can redirect
+        dispatch({ type: 'ADD_SKATEPARK', payload: { name, location, spaceType, difficulty }, history});
+    }
     return (
         <div>
-            <h3>This is the form</h3>
-            <pre>{JSON.stringify(newSkatepark)}</pre>
-            <form onSubmit={addNewSkatepark}>
-                <input type='text' value={newSkatepark.name} onChange={handleNameChange} />
-                <input type='submit' value='Add New Skatepark' />
+            <h3>Add a park here</h3>
+            <pre>{JSON.stringify(submitForm)}</pre>
+            <form onSubmit={submitForm}>
+            <p>Name: <input value={name} onChange={(e) => setName(e.target.value)} /></p>
+                <p>Location: <input value={location} onChange={(e) => setLocation(e.target.value)}  /></p>
+                <p>Space Type: <input value={spaceType} onChange={(e) => setSpaceType(e.target.value)}  /></p>
+                <p>Difficulty: <input value={difficulty} onChange={(e) => setDifficulty(e.target.value)}  /></p>
             </form>
         </div>
     );
