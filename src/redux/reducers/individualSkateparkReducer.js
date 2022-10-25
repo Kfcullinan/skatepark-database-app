@@ -1,12 +1,6 @@
-const initialDetails = {
-    "id": 0,
-    "name": '',
-    "location": '',
-    "space_type": '',
-    "difficulty": '',
-}
+//selectedSkatepark = skateparkToDisplay - store selected skatepark
 
-const individualSkateparkReducer = (state = initialDetails, action) => {
+const individualSkateparkReducer = (state = {}, action) => {
     switch (action.type) {
         case 'SET_INDIVIDUAL_SKATEPARK':
             return action.payload;
