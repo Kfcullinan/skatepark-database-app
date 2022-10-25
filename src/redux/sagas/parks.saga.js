@@ -1,13 +1,12 @@
 import { put, takeLatest } from "redux-saga/effects";
 import axios from "axios";
 
-//all Skatepark Sagas
+//parksSaga generator function
 function* parksSaga() {
-  yield takeLatest('FETCH_SKATEPARKS', fetchAllSkateparks);
-  //yield takeLatest('FETCH_DETAILS', fetchDetails);
-  // yield takeLatest('FETCH_FEATURES', fetchFeatures);
+  yield takeLatest("ADD_SKATEPARK", addSkatepark);
+  yield takeLatest("FETCH_SKATEPARKS", fetchAllSkateparks);
+  yield takeLatest("FETCH_SKATEPARK_DETAILS", fetchSkateparkDetails);
 }
-
 
 function* fetchAllSkateparks() {
   // get all parks from the DB
@@ -22,17 +21,27 @@ function* fetchAllSkateparks() {
   }
 }
 
-//Get specific skatepark
-// function* fetchDetails() {
-//   try {
-//     const details = yield axios.get('/api/parks');
-//     yield put({ type: 'SET_DETAILS'})
-//   }
- 
-// }
+function* addSkatepark(action) {
+  try {
+    yield axios.post(`/api/parks`, action.payload);
+    if (action.history) {
+      action.history.push("/");
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
 
-
-
-
+function* fetchSkateparkDetails(action) {
+  try {
+    const skatepark = yield axios.get(`/api/parks/${action.payload}`);
+    yield put({ type: 'SET_SKATEPARK_DETAILS', payload: skatepark.data})
+    //fetch features
+    const features = yield axios.get(`/api/features/${action.payload}`);
+    yield put({ type: 'SET_FEATURES', payload: features.data})
+  } catch (e) {
+      console.log(e);
+  }
+}
 
 export default parksSaga;
