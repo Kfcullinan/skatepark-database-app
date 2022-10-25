@@ -38,7 +38,7 @@ router.get('/', (req, res) => {
 
 //GET selected skateparks
 router.get('/:id', (req, res) => {
-    const queryText = 'SELECT * FROM "skateparks" WHERE "id"=$1';
+    const queryText = `SELECT * FROM "skateparks" WHERE "id"=$1`;
 
     pool.query(queryText, [req.params.id])
     .then((result) => {
@@ -70,7 +70,8 @@ router.get('/:id', (req, res) => {
       console.log('New skatepark Id:', result.rows[0].id); //ID IS HERE!
       
       const createdSkateparkId = result.rows[0].id
-  
+        res.sendStatus(201);
+
       // Now handle the genre reference
       const insertSkateparkDetailsQuery = `
         INSERT INTO "skatepark_features" ("skatepark_id", "feature_id")
