@@ -35,17 +35,18 @@ function AddSkateparkPage() {
     const submitForm = (e) => {
         e.preventDefault();
         // Pass history with our dispatch so that the saga can redirect
-        dispatch({ type: 'ADD_SKATEPARK', payload: { name, location, spaceType, difficulty }, history});
+        dispatch({ type: 'ADD_SKATEPARK', payload: { name, location, spaceType, difficulty, feature_id: 1}, history});
     }
     return (
         <div>
             <h3>Add a park here</h3>
             <pre>{JSON.stringify(submitForm)}</pre>
             <form onSubmit={submitForm}>
-            <p>Name: <input value={name} onChange={(e) => setName(e.target.value)} /></p>
-                <p>Location: <input value={location} onChange={(e) => setLocation(e.target.value)}  /></p>
-                <p>Space Type: <input value={spaceType} onChange={(e) => setSpaceType(e.target.value)}  /></p>
-                <p>Difficulty: <input value={difficulty} onChange={(e) => setDifficulty(e.target.value)}  /></p>
+            <p>Name: <input value={name} onChange={(e) => setName(e.target.value)} type="text"/></p>
+                <p>Location: <input value={location} onChange={(e) => setLocation(e.target.value)}  type="text"/></p>
+                <p>Space Type: <input value={spaceType} onChange={(e) => setSpaceType(e.target.value)} type="text"/></p>
+                <p>Difficulty: <input value={difficulty} onChange={(e) => setDifficulty(e.target.value)}  type="text"/></p>
+                <input type="submit" />
             </form>
         </div>
     );

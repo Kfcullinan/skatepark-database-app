@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
 
+
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
   const user = useSelector((store) => store.user);
@@ -40,7 +41,7 @@ function UserPage() {
     
         <h1>Skateparks</h1>
         <section>
-          <pre>hello{JSON.stringify(skateparks)}</pre>
+          <pre>{JSON.stringify(skateparks)}</pre>
           {skateparks.map(skateparks => {
             return (
               <div key={skateparks.id}>

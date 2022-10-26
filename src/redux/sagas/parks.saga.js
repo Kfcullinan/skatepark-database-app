@@ -25,7 +25,7 @@ function* addSkatepark(action) {
   try {
     yield axios.post(`/api/parks`, action.payload);
     if (action.history) {
-      action.history.push("/");
+      action.history.push('/');
     }
   } catch (e) {
     console.log(e);

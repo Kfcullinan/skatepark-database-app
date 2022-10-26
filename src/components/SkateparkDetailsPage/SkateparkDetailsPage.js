@@ -19,7 +19,7 @@ function SkateparkDetailsPage (){
             <p>{skateparks.difficulty}</p>
             <br />
             <h3>Features: </h3>
-            {/* {features.map(features => `${features.type}`)} */}
+             {features.map(features => `${features.type}`)} 
             <br />
             <br />
             <button onClick={returnHome}>Return Home</button>

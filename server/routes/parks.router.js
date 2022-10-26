@@ -60,17 +60,17 @@ router.get('/:id', (req, res) => {
     // RETURNING "id" will give us back the id of the created park
     
     const insertSkateparkQuery = `
-    INSERT INTO "skateparks" ("name", "location", "space_type", "difficulty")
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO "skateparks" ("name", "location", "space_type", "difficulty", "admin_id")
+    VALUES ($1, $2, $3, $4, $5)
     RETURNING "id"`;
   
     // FIRST QUERY MAKES PARK
-    pool.query(insertSkateparkQuery, [req.body.name, req.body.location, req.body.space_type, req.body.difficulty])
+    pool.query(insertSkateparkQuery, [req.body.name, req.body.location, req.body.spaceType, req.body.difficulty, req.user.id])
     .then(result => {
       console.log('New skatepark Id:', result.rows[0].id); //ID IS HERE!
       
       const createdSkateparkId = result.rows[0].id
-        res.sendStatus(201);
+      
 
       // Now handle the genre reference
       const insertSkateparkDetailsQuery = `
@@ -78,7 +78,7 @@ router.get('/:id', (req, res) => {
         VALUES  ($1, $2);
         `
         // SECOND QUERY ADDS GENRE FOR THAT NEW MOVIE
-        pool.query(insertSkateparkDetailsQuery, [createdSkateparkId, req.body.genre_id]).then(result => {
+        pool.query(insertSkateparkDetailsQuery, [createdSkateparkId, req.body.feature_id]).then(result => {
           //Now that both are done, send back success!
           res.sendStatus(201);
         }).catch(err => {
