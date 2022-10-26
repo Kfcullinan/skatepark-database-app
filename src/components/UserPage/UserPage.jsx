@@ -4,7 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
-
+import Grid from "@mui/material/Grid";
+import Card from '@mui/material/Card'; 
+import CardActions from '@mui/material/CardActions'; 
+import CardMedia from '@mui/material/CardMedia'; 
+import Typography from '@mui/material/Typography';
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -41,11 +45,12 @@ function UserPage() {
     
         <h1>Skateparks</h1>
         <section>
-          <pre>{JSON.stringify(skateparks)}</pre>
+          <Grid container spacing={4}></Grid>
           {skateparks.map(skateparks => {
             return (
               <div key={skateparks.id}>
                 <h2>{skateparks.name}</h2>
+                <img className="skateparkPhoto" src={skateparks.photo} />
                 <h3>{skateparks.location}</h3>
                 <h3>{skateparks.space_type}</h3>
                 <h3>{skateparks.difficulty}</h3>

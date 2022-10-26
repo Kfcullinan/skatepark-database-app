@@ -60,12 +60,12 @@ router.get('/:id', (req, res) => {
     // RETURNING "id" will give us back the id of the created park
     
     const insertSkateparkQuery = `
-    INSERT INTO "skateparks" ("name", "location", "space_type", "difficulty", "admin_id")
-    VALUES ($1, $2, $3, $4, $5)
+    INSERT INTO "skateparks" ("name", "location", "space_type", "difficulty", "photo", "admin_id")
+    VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING "id"`;
   
     // FIRST QUERY MAKES PARK
-    pool.query(insertSkateparkQuery, [req.body.name, req.body.location, req.body.spaceType, req.body.difficulty, req.user.id])
+    pool.query(insertSkateparkQuery, [req.body.name, req.body.location, req.body.spaceType, req.body.difficulty, req.body.photo, req.user.id])
     .then(result => {
       console.log('New skatepark Id:', result.rows[0].id); //ID IS HERE!
       

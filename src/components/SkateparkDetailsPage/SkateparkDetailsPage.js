@@ -14,6 +14,7 @@ function SkateparkDetailsPage (){
     return(
         <div>
             <h2>{skateparks.name}</h2>
+            <img style={{width:"15%"}} className="skateparkPhoto"src={skateparks.photo}/>
             <h3>{skateparks.location}</h3>
             <p>{skateparks.space_type}</p>
             <p>{skateparks.difficulty}</p>
