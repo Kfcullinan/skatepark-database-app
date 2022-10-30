@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 
 
 function SkateparkDetailsPage() {
-    const skateparks = useSelector(store => store.individualSkateparkReducer);
+    const skatepark = useSelector(store => store.individualSkateparkReducer);
     const features = useSelector(store => store.features);
     const { skateparkId } = useParams();
     const dispatch = useDispatch();
@@ -14,6 +14,18 @@ function SkateparkDetailsPage() {
         history.push('/')
     }
 
+    const editSkatepark = () => {
+        history.push('/edit')
+    };
+
+    const deleteSkatepark = () => {
+        useEffect(() => {
+        dispatch({ type: 'DELETE_SKATEPARK', payload: skateparkId })
+        }, [skateparkId]);
+        history.push('/')
+        window.scrollTo(0,0);
+    }
+
     useEffect(() => {
         dispatch({ type: 'FETCH_SKATEPARK_DETAILS', payload: skateparkId });
     }, [skateparkId])
@@ -21,22 +33,23 @@ function SkateparkDetailsPage() {
     return(
         <div>
             <h1>{skateparkId}</h1>
-            <h2>{skateparks.name}</h2>
-            <img style={{width:"15%"}} className="skateparkPhoto" src={skateparks.photo}/>
-            <h3>{skateparks.location}</h3>
-            <p>{skateparks.space_type}</p>
-            <p>{skateparks.difficulty}</p>
+            <h2>{skatepark.name}</h2>
+            <img src={skatepark.photo} alt={skatepark.name}/>
+            <h3>{skatepark.location}</h3>
+            <p>{skatepark.space_type}</p>
+            <p>{skatepark.difficulty}</p>
             <br />
             <h3>Features: </h3>
-                <ul>
+                {/* <ul>
                     {
                     features.map(featuresToDisplay => <li>{featuresToDisplay.type}</li>)
                     }
-                </ul>
+                </ul> */}
             <br />
             <br />
             <button onClick={returnHome}>Return Home</button>
-
+            <button onClick={editSkatepark}>Edit Skatepark</button>
+            <button onClick={deleteSkatepark}>Delete Skatepark</button>
         </div>
     )
 }
