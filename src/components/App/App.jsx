@@ -57,9 +57,9 @@ function App() {
             <SkateparkDetailsPage />
           </Route>
 
-          {/* <Route exact path="/edit">
+          <Route exact path="/edit">
             <SkateparkEditPage />
-          </Route> */}
+          </Route>
 
           <Route exact path="/newpark">
             <AddSkateparkPage />
