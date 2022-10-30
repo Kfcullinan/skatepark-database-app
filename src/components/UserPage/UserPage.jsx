@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import Grid from "@mui/material/Grid";
 import Card from '@mui/material/Card'; 
+import CardHeader from '@mui/material/Card'; 
 import CardActions from '@mui/material/CardActions'; 
 import CardMedia from '@mui/material/CardMedia'; 
 import Typography from '@mui/material/Typography';
@@ -25,11 +26,11 @@ function UserPage() {
     dispatch({ type: "FETCH_SKATEPARKS" });
   }, []);
 
-  // const detail = (skatepark) =>{
-  //   dispatch ({ type: 'SELECT_SKATEPARK', payload: skatepark});
-  //   dispatch ({ type: 'FETCH_FEATURES', payload: skateparks.id});
-  //   history.push('/details')
-  // }
+  const displaySkatepark = (skateparkToDisplay) => {
+    // dispatch ({ type: 'SELECT_SKATEPARK', payload: skatepark});
+    // dispatch ({ type: 'FETCH_FEATURES', payload: skateparks.id});
+    history.push(`/detail/${skateparkToDisplay.id}`);
+  }
 
   return (
     <div className="container">
@@ -39,13 +40,13 @@ function UserPage() {
       <br></br>
       <br></br>
 
-      <button onClick={navToAddParkPage}>Add new park</button> 
+      <button onClick={navToAddParkPage}>Add new skatepark</button> 
 
       
     
         <h1>Skateparks</h1>
         <section>
-          <Grid container spacing={4}></Grid>
+          {/* <Grid container spacing={4}></Grid> */}
           {skateparks.map(skateparks => {
             return (
               <div key={skateparks.id}>
