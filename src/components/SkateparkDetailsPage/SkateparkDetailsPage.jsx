@@ -1,35 +1,44 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 
-function SkateparkDetails() {
-    const skatepark = useSelector(store => store.selectedSkatepark);
+
+function SkateparkDetailsPage() {
+    const skateparks = useSelector(store => store.individualSkateparkReducer);
     const features = useSelector(store => store.features);
     const { skateparkId } = useParams();
     const dispatch = useDispatch();
+    const history = useHistory()
+
+    const returnHome = () => {
+        history.push('/')
+    }
 
     useEffect(() => {
-        dispatch({ type: "FETCH_SKATEPARK_DETAILS", payload: skateparkId });
-    }, [skateparkId]);
+        dispatch({ type: 'FETCH_SKATEPARK_DETAILS', payload: skateparkId });
+    }, [skateparkId])
 
-    return (
+    return(
         <div>
             <h1>{skateparkId}</h1>
-            <h3>{skateparks.name}</h3>
-            <img src={skateparks.photo} />
-            <p>{skateparks.location}</p>
+            <h2>{skateparks.name}</h2>
+            <img style={{width:"15%"}} className="skateparkPhoto" src={skateparks.photo}/>
+            <h3>{skateparks.location}</h3>
             <p>{skateparks.space_type}</p>
             <p>{skateparks.difficulty}</p>
-            <ul>
-                {
-                    features.map(featureToDisplay => <li>{featureToDisplay.type}</li>)
-                }
-            </ul>
+            <br />
+            <h3>Features: </h3>
+                <ul>
+                    {
+                    features.map(featuresToDisplay => <li>{featuresToDisplay.type}</li>)
+                    }
+                </ul>
+            <br />
+            <br />
+            <button onClick={returnHome}>Return Home</button>
+
         </div>
     )
 }
 
-
-
-
-export default SkateparkDetails;
+export default SkateparkDetailsPage; 

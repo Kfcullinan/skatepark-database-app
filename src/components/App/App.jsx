@@ -48,12 +48,12 @@ function App() {
             exact path="/about">
             <AboutPage />
           </Route>
-{/* 
+  {/* 
           <Route exact path="/landingpage">
             <LandingPage />
           </Route> */}
 
-          <Route exact path="/details">
+          <Route exact path="/details/:skateparkId">
             <SkateparkDetailsPage />
           </Route>
 
@@ -61,10 +61,10 @@ function App() {
             <SkateparkEditPage />
           </Route> */}
 
-          /* <Route exact path="/newpark">
+          <Route exact path="/newpark">
             <AddSkateparkPage />
-          </Route> */
-
+          </Route> 
+        
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).

@@ -4,7 +4,7 @@ const pool = require('../modules/pool')
 
 router.get('/:id', (req, res) => {
     const query = `SELECT * FROM "features" JOIN "skatepark_features"
-                   ON "features"."id" = "skatepark_features"."features_id"
+                   ON "features"."id" = "skatepark_features"."feature_id"
                    WHERE "skatepark_features"."skatepark_id"=$1`;
     pool.query(query, [req.params.id])
       .then(result => {

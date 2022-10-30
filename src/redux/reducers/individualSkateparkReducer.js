@@ -1,12 +1,18 @@
-//selectedSkatepark = skateparkToDisplay - store selected skatepark
+//individualSkateparkReducer = skateparkToDisplay - store selected skatepark
 
 const individualSkateparkReducer = (state = {}, action) => {
-    switch (action.type) {
-        case 'SET_INDIVIDUAL_SKATEPARK':
-            return action.payload;
-        default:
-            return state;
+    if(action.type === 'SET_SKATEPARK_DETAILS') {
+        console.log('in SET PARK DETAILS', action.payload)
+        return action.payload;
+
+
+    // switch (action.type) {
+    //     case 'SET_SKATEPARK_DETAILS':
+    //         return action.payload;
+    //     default:
     }
+            return state;
+   
 }
 
 export default individualSkateparkReducer;

@@ -41,16 +41,14 @@ router.get('/:id', (req, res) => {
     const queryText = `SELECT * FROM "skateparks" WHERE "id"=$1`;
 
     pool.query(queryText, [req.params.id])
-    .then((result) => {
+    .then(result => {
         res.send(result.rows[0])
     })
-    .catch((error) => {
+    .catch(error => {
         console.log('Error completing SELECT skatepark query', error)
         res.sendStatus(500)
     })
 })
-
-//GET selected skatepark features 
 
 /**
  * POST route template
@@ -70,6 +68,7 @@ router.get('/:id', (req, res) => {
       console.log('New skatepark Id:', result.rows[0].id); //ID IS HERE!
       
       const createdSkateparkId = result.rows[0].id
+      res.sendStatus(201);
       
 
       // Now handle the genre reference

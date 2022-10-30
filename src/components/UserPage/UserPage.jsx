@@ -29,7 +29,7 @@ function UserPage() {
   const displaySkatepark = (skateparkToDisplay) => {
     // dispatch ({ type: 'SELECT_SKATEPARK', payload: skatepark});
     // dispatch ({ type: 'FETCH_FEATURES', payload: skateparks.id});
-    history.push(`/detail/${skateparkToDisplay.id}`);
+    history.push(`/details/${skateparkToDisplay.id}`);
   }
 
   return (
@@ -43,7 +43,7 @@ function UserPage() {
       <button onClick={navToAddParkPage}>Add new skatepark</button> 
 
       
-    
+      <main>
         <h1>Skateparks</h1>
         <section>
           {/* <Grid container spacing={4}></Grid> */}
@@ -51,18 +51,16 @@ function UserPage() {
             return (
               <div key={skateparks.id}>
                 <h2>{skateparks.name}</h2>
-                <img className="skateparkPhoto" src={skateparks.photo} />
-                <h3>{skateparks.location}</h3>
+                <img onClick={(event) => displaySkatepark(skateparks)} src={skateparks.photo} alt={skateparks.name} />
+                {/* <h3>{skateparks.location}</h3>
                 <h3>{skateparks.space_type}</h3>
-                <h3>{skateparks.difficulty}</h3>
-                
-                 {/* <button onClick={() => {detail(skatepark)}}/>  */}
-                <br></br>
-                
+                <h3>{skateparks.difficulty}</h3> */}
+                      <br></br>
               </div>
             );
           })}
         </section>
+      </main>
     </div>
   );
 }
