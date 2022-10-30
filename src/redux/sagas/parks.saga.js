@@ -6,6 +6,8 @@ function* parksSaga() {
   yield takeLatest("ADD_SKATEPARK", addSkatepark);
   yield takeLatest("FETCH_SKATEPARKS", fetchAllSkateparks);
   yield takeLatest("FETCH_SKATEPARK_DETAILS", fetchSkateparkDetails);
+  yield takeLatest("EDIT_SKATEPARK", editSkatepark);
+  yield takeLatest("DELETE_SKATEPARK", deleteSkatepark);
 }
 
 function* fetchAllSkateparks() {
@@ -41,6 +43,26 @@ function* fetchSkateparkDetails(action) {
     yield put({ type: 'SET_FEATURES', payload: features.data})
   } catch (e) {
       console.log(e);
+  }
+}
+
+function* editSkatepark(action) {
+  try {
+    yield axios.put(`/api/parks/${action.payload}`)
+    if (action.history) {
+      action.history.goBack();
+    }
+  }catch (e){
+    console.log(e);
+  }
+}
+
+function* deleteSkatepark(action) {
+  try {
+    yield axios.delete(`/api/parks/${action.payload}`)
+    yield put({type: 'SET_SKATEPARKS', payload: skateparks.data})
+  } catch (e) {
+  console.log(e)
   }
 }
 
