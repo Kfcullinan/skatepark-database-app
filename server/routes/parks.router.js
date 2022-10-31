@@ -93,4 +93,15 @@ router.get('/:id', (req, res) => {
     })
   })
 
+  router.put ('/:id', (req, res)=> {
+    const queryText = `UPDATE "skateparks" SET "name"=$1, "location"=$2, "space_type"=$3, "difficulty"=$4, "photo"=$5
+                      WHERE "id"=$6`;
+    pool.query(queryText, [req.body.name, req.body.location, req.body.space_type, req.body.difficulty, req.body.photo, req.params.id])
+    .then(result => {
+      res.sendStatus(201);
+    }).catch(err => {
+      res.sendStatus(500)
+    })
+  })
+  
 module.exports = router;

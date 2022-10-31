@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams, Link } from 'react-router-dom';
 
 
 function SkateparkDetailsPage() {
     const skatepark = useSelector(store => store.individualSkateparkReducer);
     const features = useSelector(store => store.features);
     const { skateparkId } = useParams();
+    //const { id } = useParams();
     const dispatch = useDispatch();
     const history = useHistory()
 
@@ -15,7 +16,7 @@ function SkateparkDetailsPage() {
     }
 
     const editSkatepark = () => {
-        history.push('/edit')
+        history.push(`/edit/${skateparkId}`)
     };
 
     const deleteSkatepark = () => {
@@ -29,6 +30,8 @@ function SkateparkDetailsPage() {
     useEffect(() => {
         dispatch({ type: 'FETCH_SKATEPARK_DETAILS', payload: skateparkId });
     }, [skateparkId])
+
+
 
     return(
         <div>
@@ -48,7 +51,7 @@ function SkateparkDetailsPage() {
             <br />
             <br />
             <button onClick={returnHome}>Return Home</button>
-            <button onClick={editSkatepark}>Edit Skatepark</button>
+            <button><Link to={`/edit/${skatepark.id}`}>Edit Skatepark</Link></button>
             <button onClick={deleteSkatepark}>Delete Skatepark</button>
         </div>
     )

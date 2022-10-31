@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+
 
 
 
@@ -14,9 +16,23 @@ function AddSkateparkPage() {
     const [photo, setPhoto] = useState('');
     const dispatch = useDispatch();
     const history = useHistory();
+    const {id} = useParams();
     //Initial state is an OBJECT, with keys id and name
     // let [newSkatepark, setSkatePark] = useState({id: 5, name: ''});
+    useEffect(()=> {
+        if (id) {
+            axios.get (`/api/parks/${id}`)
+            .then (response => {
+                const skatepark = response.data;
+                setName(skatepark.name)
+                setLocation(skatepark.location)
+                setSpaceType(skatepark.spaceType)
+                setDifficulty(skatepark.difficulty)
+                setPhoto(skatepark.photo)
+            })
+        }
 
+    },[id])
     const handleNameChange = (event) => {
         console.log('event happened');
         //Similar to in redux -- we dont want to get rid of the id field when we update name
@@ -35,13 +51,17 @@ function AddSkateparkPage() {
 
     const submitForm = (e) => {
         e.preventDefault();
+        if (id){
+            dispatch({type: 'EDIT_SKATEPARK', payload: newSkatepark, history})
+        } else {
+            dispatch({ type: 'ADD_SKATEPARK', payload: { name, location, spaceType, difficulty, photo, feature_id: 1}, history}); 
+        }
         // Pass history with our dispatch so that the saga can redirect
-        dispatch({ type: 'ADD_SKATEPARK', payload: { name, location, spaceType, difficulty, photo, feature_id: 1}, history});
     }
     return (
         <div>
-            <h3>Add a park here</h3>
-            <pre>{JSON.stringify(submitForm)}</pre>
+            <h3>{id ? 'Edit Skatepark': 'Add a park here'}</h3>
+            
             <form onSubmit={submitForm}>
                 <p>Name: <input value={name} onChange={(e) => setName(e.target.value)} type="text"/></p>                
                 <p>Photo: <input value={photo} onChange={(e) => setPhoto(e.target.value)}  type="text"/></p>

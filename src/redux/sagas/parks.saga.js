@@ -48,11 +48,11 @@ function* fetchSkateparkDetails(action) {
 
 function* editSkatepark(action) {
   try {
-    yield axios.put(`/api/parks/${action.payload}`)
+    yield axios.put(`/api/parks/${action.payload.id}`, action.payload)
     if (action.history) {
       action.history.goBack();
     }
-  }catch (e){
+  } catch (e){
     console.log(e);
   }
 }

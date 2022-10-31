@@ -58,13 +58,15 @@ function App() {
             <SkateparkDetailsPage />
           </Route>
 
-          <Route exact path="/edit">
-            <SkateparkEditPage />
-          </Route>
+        
 
           <Route exact path="/newpark">
             <AddSkateparkPage />
           </Route> 
+
+          <Route exact path="/edit/:id">
+            <AddSkateparkPage />
+          </Route>
         
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
