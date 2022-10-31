@@ -43,11 +43,11 @@ function SkateparkDetailsPage() {
             <p>{skatepark.difficulty}</p>
             <br />
             <h3>Features: </h3>
-                {/* <ul>
+                 {/* <ul>
                     {
                     features.map(featuresToDisplay => <li>{featuresToDisplay.type}</li>)
                     }
-                </ul> */}
+                </ul>  */}
             <br />
             <br />
             <button onClick={returnHome}>Return Home</button>

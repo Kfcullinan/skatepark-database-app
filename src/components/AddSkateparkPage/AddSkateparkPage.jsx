@@ -11,12 +11,12 @@ function AddSkateparkPage() {
     const features = useSelector( store => store.features );
     const [name, setName] = useState('');
     const [location, setLocation] = useState('');
-    const [spaceType, setSpaceType] = useState('');
+    const [space_type, setSpace_type] = useState('');
     const [difficulty, setDifficulty] = useState('');
     const [photo, setPhoto] = useState('');
     const dispatch = useDispatch();
     const history = useHistory();
-    const {id} = useParams();
+    const { id } = useParams();
     //Initial state is an OBJECT, with keys id and name
     // let [newSkatepark, setSkatePark] = useState({id: 5, name: ''});
     useEffect(()=> {
@@ -24,11 +24,11 @@ function AddSkateparkPage() {
             axios.get (`/api/parks/${id}`)
             .then (response => {
                 const skatepark = response.data;
-                setName(skatepark.name)
-                setLocation(skatepark.location)
-                setSpaceType(skatepark.spaceType)
-                setDifficulty(skatepark.difficulty)
-                setPhoto(skatepark.photo)
+                setName(skatepark.name);
+                setLocation(skatepark.location);
+                setSpace_type(skatepark.space_type);
+                setDifficulty(skatepark.difficulty);
+                setPhoto(skatepark.photo);
             })
         }
 
@@ -52,9 +52,9 @@ function AddSkateparkPage() {
     const submitForm = (e) => {
         e.preventDefault();
         if (id){
-            dispatch({type: 'EDIT_SKATEPARK', payload: newSkatepark, history})
+            dispatch({type: 'EDIT_SKATEPARK', payload: { name, location, space_type, difficulty, photo, id}, history});
         } else {
-            dispatch({ type: 'ADD_SKATEPARK', payload: { name, location, spaceType, difficulty, photo, feature_id: 1}, history}); 
+            dispatch({ type: 'ADD_SKATEPARK', payload: { name, location, space_type, difficulty, photo, feature_id: 1}, history}); 
         }
         // Pass history with our dispatch so that the saga can redirect
     }
@@ -66,7 +66,7 @@ function AddSkateparkPage() {
                 <p>Name: <input value={name} onChange={(e) => setName(e.target.value)} type="text"/></p>                
                 <p>Photo: <input value={photo} onChange={(e) => setPhoto(e.target.value)}  type="text"/></p>
                 <p>Location: <input value={location} onChange={(e) => setLocation(e.target.value)}  type="text"/></p>
-                <p>Space Type: <input value={spaceType} onChange={(e) => setSpaceType(e.target.value)} type="text"/></p>
+                <p>Space Type: <input value={space_type} onChange={(e) => setSpace_type(e.target.value)} type="text"/></p>
                 <p>Difficulty: <input value={difficulty} onChange={(e) => setDifficulty(e.target.value)}  type="text"/></p>
                 <input type="submit" />
             </form>

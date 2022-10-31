@@ -63,7 +63,7 @@ router.get('/:id', (req, res) => {
     RETURNING "id"`;
   
     // FIRST QUERY MAKES PARK
-    pool.query(insertSkateparkQuery, [req.body.name, req.body.location, req.body.spaceType, req.body.difficulty, req.body.photo, req.user.id])
+    pool.query(insertSkateparkQuery, [req.body.name, req.body.location, req.body.space_type, req.body.difficulty, req.body.photo, req.user.id])
     .then(result => {
       console.log('New skatepark Id:', result.rows[0].id); //ID IS HERE!
       
@@ -94,13 +94,14 @@ router.get('/:id', (req, res) => {
   })
 
   router.put ('/:id', (req, res)=> {
-    const queryText = `UPDATE "skateparks" SET "name"=$1, "location"=$2, "space_type"=$3, "difficulty"=$4, "photo"=$5
-                      WHERE "id"=$6`;
+    const queryText = `UPDATE "skateparks" SET "name"= $1, "location" = $2, "space_type" = $3, "difficulty" = $4, "photo" = $5
+                      WHERE "id" = $6`;
     pool.query(queryText, [req.body.name, req.body.location, req.body.space_type, req.body.difficulty, req.body.photo, req.params.id])
-    .then(result => {
-      res.sendStatus(201);
-    }).catch(err => {
-      res.sendStatus(500)
+    .then(results => {
+      res.sendStatus(200);
+    }).catch(error => {
+      console.log(error);
+      res.sendStatus(500);
     })
   })
   
