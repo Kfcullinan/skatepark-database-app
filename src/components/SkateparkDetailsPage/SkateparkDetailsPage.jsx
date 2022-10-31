@@ -20,12 +20,11 @@ function SkateparkDetailsPage() {
     };
 
     const deleteSkatepark = () => {
-        useEffect(() => {
+        
         dispatch({ type: 'DELETE_SKATEPARK', payload: skateparkId })
-        }, [skateparkId]);
         history.push('/')
         window.scrollTo(0,0);
-    }
+    };
 
     useEffect(() => {
         dispatch({ type: 'FETCH_SKATEPARK_DETAILS', payload: skateparkId });

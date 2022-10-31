@@ -50,6 +50,19 @@ router.get('/:id', (req, res) => {
     })
 })
 
+router.delete('/:id', (req, res) => {
+  const queryText = `DELETE FROM "skateparks" WHERE "id"=$1`;
+
+  pool.query(queryText, [req.params.id])
+  .then(result => {
+      res.send(result.rows[0])
+  })
+  .catch(error => {
+      console.log('Error completing SELECT skatepark query', error)
+      res.sendStatus(500)
+  })
+})
+
 /**
  * POST route template
  */
