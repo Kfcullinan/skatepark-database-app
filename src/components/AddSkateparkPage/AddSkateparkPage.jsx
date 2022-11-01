@@ -42,7 +42,7 @@ function AddSkateparkPage() {
     }
 
     const cancelEditButton = () => {
-        history.push('/details/id')
+        history.push(`/details/${skatepark}`)
     }
 
     const addNewSkatepark = event => {
