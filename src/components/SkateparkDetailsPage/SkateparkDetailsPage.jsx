@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams, Link } from 'react-router-dom';
-
+import Grid from "@mui/material/Grid";
+import Card from '@mui/material/Card';
 
 function SkateparkDetailsPage() {
     const skatepark = useSelector(store => store.individualSkateparkReducer);
@@ -11,6 +12,9 @@ function SkateparkDetailsPage() {
     const dispatch = useDispatch();
     const history = useHistory()
 
+    // const cancelEditButton = () => {
+
+    // }
     const returnHome = () => {
         history.push('/')
     }
@@ -33,7 +37,9 @@ function SkateparkDetailsPage() {
 
 
     return(
-        <div>
+        <Grid item xs={12} md={6} xl={4}>
+        <Card elevation={5}>
+        
             <h1>{skateparkId}</h1>
             <h2>{skatepark.name}</h2>
             <img src={skatepark.photo} alt={skatepark.name}/>
@@ -52,7 +58,9 @@ function SkateparkDetailsPage() {
             <button onClick={returnHome}>Return Home</button>
             <button><Link to={`/edit/${skatepark.id}`}>Edit Skatepark</Link></button>
             <button onClick={deleteSkatepark}>Delete Skatepark</button>
-        </div>
+            
+            </Card>
+        </Grid>
     )
 }
 

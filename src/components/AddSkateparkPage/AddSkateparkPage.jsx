@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import Card from '@mui/material/Card';
+import Container from '@mui/material/Container';
 
 
 
@@ -39,6 +41,10 @@ function AddSkateparkPage() {
         setSkatePark({...newSkatepark, name: event.target.value})
     }
 
+    const cancelEditButton = () => {
+        history.push('/details/id')
+    }
+
     const addNewSkatepark = event => {
         event.preventDefault();
         dispatch({ 
@@ -60,6 +66,7 @@ function AddSkateparkPage() {
     }
     return (
         <div>
+        <Card>
             <h3>{id ? 'Edit Skatepark': 'Add a park here'}</h3>
             
             <form onSubmit={submitForm}>
@@ -69,8 +76,10 @@ function AddSkateparkPage() {
                 <p>Space Type: <input value={space_type} onChange={(e) => setSpace_type(e.target.value)} type="text"/></p>
                 <p>Difficulty: <input value={difficulty} onChange={(e) => setDifficulty(e.target.value)}  type="text"/></p>
                 <input type="submit" />
+                <button onClick={cancelEditButton}>Cancel</button>
             </form>
-        </div>
+            </Card>
+            </div>
     );
 }
 

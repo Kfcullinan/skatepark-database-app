@@ -34,9 +34,9 @@ function UserPage() {
 
   return (
     <div className="container">
-      <h2>Welcome, {user.username}!</h2>
-      <p>Your ID is: {user.id}</p>
-      <LogOutButton className="btn" />
+      <h1>Welcome, {user.username}!</h1>
+      {/* <p>Your ID is: {user.id}</p> */}
+      
       <br></br>
       <br></br>
 
@@ -46,7 +46,8 @@ function UserPage() {
       <main>
         <h1>Skateparks</h1>
         <section>
-          {/* <Grid container spacing={4}></Grid> */}
+          <Grid item xs={12} md={6} xl={4}> 
+            <Card elevation={3}>
           {skateparks.map(skateparks => {
             return (
               <div key={skateparks.id}>
@@ -55,13 +56,17 @@ function UserPage() {
                 {/* <h3>{skateparks.location}</h3>
                 <h3>{skateparks.space_type}</h3>
                 <h3>{skateparks.difficulty}</h3> */}
+                
                       <br></br>
               </div>
             );
           })}
+          </Card>
+          </Grid>
         </section>
       </main>
     </div>
+    
   );
 }
 
