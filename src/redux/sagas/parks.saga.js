@@ -59,6 +59,7 @@ function* editSkatepark(action) {
 
 function* deleteSkatepark(action) {
   try {
+    console.log("id to delete is", action.payload)
     yield axios.delete(`/api/parks/${action.payload}`)
     yield put({type: 'SET_SKATEPARKS', payload: skateparks.data})
   } catch (e) {

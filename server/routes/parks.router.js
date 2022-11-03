@@ -42,7 +42,8 @@ router.get('/:id', (req, res) => {
 
     pool.query(queryText, [req.params.id])
     .then(result => {
-        res.send(result.rows[0])
+      const skatepark = result.rows[0]
+    res.send(skatepark)
     })
     .catch(error => {
         console.log('Error completing SELECT skatepark query', error)
@@ -51,11 +52,12 @@ router.get('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
+  console.log("to delete is",req.params.id )
   const queryText = `DELETE FROM "skateparks" WHERE "id"=$1`;
 
   pool.query(queryText, [req.params.id])
   .then(result => {
-      res.send(result.rows[0])
+      res.sendStatus(200);
   })
   .catch(error => {
       console.log('Error completing SELECT skatepark query', error)
@@ -81,7 +83,7 @@ router.delete('/:id', (req, res) => {
       console.log('New skatepark Id:', result.rows[0].id); //ID IS HERE!
       
       const createdSkateparkId = result.rows[0].id
-      res.sendStatus(201);
+     
       
 
       // Now handle the genre reference

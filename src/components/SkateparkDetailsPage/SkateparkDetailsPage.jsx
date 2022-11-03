@@ -6,7 +6,7 @@ import Card from '@mui/material/Card';
 
 function SkateparkDetailsPage() {
     const skatepark = useSelector(store => store.individualSkateparkReducer);
-    const features = useSelector(store => store.features);
+    const features = useSelector(store => store.featuresReducer);
     const { skateparkId } = useParams();
     //const { id } = useParams();
     const dispatch = useDispatch();
@@ -48,11 +48,11 @@ function SkateparkDetailsPage() {
             <p>{skatepark.difficulty}</p>
             <br />
             <h3>Features: </h3>
-                 {/* <ul>
+                 <ul>
                     {
                     features.map(featuresToDisplay => <li>{featuresToDisplay.type}</li>)
                     }
-                </ul>  */}
+                </ul>  
             <br />
             <br />
             <button onClick={returnHome}>Return Home</button>
