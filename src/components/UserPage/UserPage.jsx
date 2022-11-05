@@ -10,6 +10,7 @@ import CardHeader from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions'; 
 import CardMedia from '@mui/material/CardMedia'; 
 import Typography from '@mui/material/Typography';
+import './user.css'
 
 function UserPage() {
   // this component doesn't do much to start, just renders some user reducer info to the DOM
@@ -52,7 +53,7 @@ function UserPage() {
             return (
               <div key={skateparks.id}>
                 <h2>{skateparks.name}</h2>
-                <img onClick={(event) => displaySkatepark(skateparks)} src={skateparks.photo} alt={skateparks.name} />
+                <img className="cover" onClick={(event) => displaySkatepark(skateparks)} src={skateparks.photo} alt={skateparks.name} />
                 {/* <h3>{skateparks.location}</h3>
                 <h3>{skateparks.space_type}</h3>
                 <h3>{skateparks.difficulty}</h3> */}
